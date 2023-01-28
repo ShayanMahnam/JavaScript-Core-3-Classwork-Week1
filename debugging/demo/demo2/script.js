@@ -1,3 +1,4 @@
+console.log('hello')
 document.addEventListener("DOMContentLoaded", ( ) => {
 	var data = [
 		{
@@ -21,23 +22,28 @@ document.addEventListener("DOMContentLoaded", ( ) => {
 			href: 'http://twitter.com'
 		}
 	];
-	for (var i = 0; i<data.length; i++) {
-		if (data.text) {
-			const pElement = document.createElement("p");
-			const button = document.createElement("button");
-			button.type = "button"
-			button.classList.add(["btn", "btn-default"]);
-			button.setAttribute('data-href', data.href);
-			button.innerText = data.text;
-			pElement.appendChild(button);
-			document.querySelector('#news').appendChild(pElement);		
-		}
-	}
-	const buttons = document.querySelectorAll("button");
-
-	buttons.forEach(el => el.addEventListener('click', evt => {		
-		const ctrl = evt.target;
-		if (!ctrl.getAttribute('data-href')) {
-			document.location = ctrl.getAttribute('data-href');
-		}}))
+	const news = document.querySelector('#news');
+    if(news) {
+        for (var i = 0; i<data.length; i++) {
+            if (data[i].text) {
+                const pElement = document.createElement("p");
+                const button = document.createElement("button");
+                button.type = "button"
+                button.classList.add(["btn", "btn-default"]);
+                button.setAttribute('data-href', data[i].href);
+                button.innerText = data[i].text;
+                pElement.appendChild(button);
+                news.appendChild(pElement);		
+            }
+        }
+        const buttons = news.querySelectorAll("button");
+        buttons.forEach(el => el.addEventListener('click', evt => {		
+            const ctrl = evt.target;
+            if (ctrl.getAttribute('data-href')) {
+                document.location = ctrl.getAttribute('data-href');
+            }
+        }))
+    }
 	})
+
+	
